@@ -1,0 +1,24 @@
+version: '3.8'
+services:
+  mongo-express:
+    image: mongo-express
+    ports:
+      - "8081:8081"
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=10.128.0.9
+    container_name: "mongo-express"
+    networks:
+      - my_network
+
+  node-exporter:
+    image: prom/node-exporter
+    container_name: "node-exporter"
+    ports:
+      - "9100:9100"
+    networks:
+      - my_network
+
+networks:
+  my_network:
+    driver: bridge
+

@@ -1,0 +1,32 @@
+version: '3.8'
+services:
+  mongodb:
+    image: mongo
+    ports:
+      - "27017:27017"
+    container_name: "mongodb"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - my_network
+
+  mongo-exporter:
+    image: bitnami/mongodb-exporter
+    ports:
+      - "9216:9216"
+    container_name: "mongo-exporter"
+    environment:
+      - MONGODB_URI=mongodb://mongodb:27017
+      - MONGODB_EXPORTER_ENABLE_ADMIN_COMMANDS_METRICS=true
+    depends_on:
+      - mongodb
+    networks:
+      - my_network
+
+volumes:
+  mongodb_data:
+
+networks:
+  my_network:
+    driver: bridge
+

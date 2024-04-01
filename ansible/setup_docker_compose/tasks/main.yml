@@ -1,0 +1,17 @@
+---
+- name: Transfer Docker Compose file to remote host
+  template:
+    src: templates/{{service_name}}/docker-compose.yml
+    dest: /home/{{ ansible_user_id }}/docker-compose.yml
+
+- name: transer neccesory files
+  template:
+    src: templates/{{service_name}}/prometheus.yml
+    dest: /home/{{ ansible_user_id }}/prometheus.yml
+  when: service_name == 'prometheus' 
+
+- name: Ensure Docker Compose is installed
+  apt:
+    name: docker-compose
+    state: present
+

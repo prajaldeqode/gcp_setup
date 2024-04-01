@@ -1,0 +1,9 @@
+mongodb:
+  hosts:
+    prapatidar@34.122.9.78:
+mongoexpress:
+  hosts:
+    prapatidar@34.72.72.156:
+prometheus:
+  hosts:
+    prapatidar@34.173.170.140
